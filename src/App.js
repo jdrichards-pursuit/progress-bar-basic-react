@@ -37,7 +37,6 @@ const App = () => {
         <div className="progressBarContainer">
           <div
             style={{
-              animationDuration: '6s',
               marginRight: donationsSum <= targetAmount ? barCalculation : 0
             }}
             className="progressBar"
