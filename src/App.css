@@ -1,0 +1,18 @@
+form {
+  margin-top: 20px;
+}
+
+input[type='submit'] {
+  display: block;
+  margin-top: 10px;
+}
+
+.progressBar {
+  height: 10px;
+  background-color: rgb(255, 111, 111);
+}
+
+.progressBarContainer {
+  border: 2px solid black;
+  width: 500px;
+}
