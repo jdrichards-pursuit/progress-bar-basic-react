@@ -7,28 +7,24 @@ const App = () => {
   const [donation, setDonation] = useState(0);
 
   const progressPerc = (100 * donationsSum) / targetAmount;
+  const barCalculation = (targetAmount - donationsSum) / 2;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newSum = +donationsSum + +donation;
+    if (!donation) return alert('You must make a donation before submitting!');
+
+    const newSum = Number(donationsSum) + Number(donation);
 
     setDonationsSum(newSum);
-    if (donationsSum > newSum) {
-      alert(
-        `You have raised ${
-          +donationsSum + +donation
-        } which is more than the target amount. Congratulations!`
-      );
-    }
 
     setDonation(0);
   };
 
   return (
-    <div>
+    <div className="container">
       <section className="progress">
-        <h1>Please Help us Raise Money for Our FundRaiser</h1>
+        <h1>Please Help us Raise Money for Our KickStarter</h1>
         <h3>
           Raised <span className="secondary">${donationsSum}</span> of{' '}
           <span className="secondary">$1000</span>
@@ -36,16 +32,13 @@ const App = () => {
         <p>
           {donationsSum < targetAmount
             ? `${progressPerc}% ...help us out!`
-            : `Thank You! We raised a total of $${donationsSum}`}
+            : `Thank You! We've reached our goal. We raised a total of $${donationsSum}`}
         </p>
         <div className="progressBarContainer">
           <div
             style={{
               animationDuration: '6s',
-              marginRight:
-                donationsSum <= targetAmount
-                  ? (targetAmount - donationsSum) / 2
-                  : 0
+              marginRight: donationsSum <= targetAmount ? barCalculation : 0
             }}
             className="progressBar"
           ></div>
@@ -53,11 +46,12 @@ const App = () => {
       </section>
       <form onSubmit={handleSubmit}>
         <label htmlFor="donate">
+          Donation Amount:{' '}
           <input
             type="text"
             id="donate"
             value={donation}
-            onChange={(e) => setDonation(+e.target.value)}
+            onChange={(e) => setDonation(Number(e.target.value))}
           />
         </label>
         <input type="submit" />
